@@ -121,4 +121,4 @@ CIS Controls v8 safeguards below are Implementation Group 1 unless marked otherw
 
 ## Next
 
-[02 - Remediation Log](./02-remediation-log.md)
+[02 - Investigation Findings](./02-investigation-findings.md)

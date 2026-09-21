@@ -1,0 +1,208 @@
+Neo@f76cb5b89009:~$ cut -d: -f1,3 /etc/passwd | sort -t: -k2 -n
+root:0
+daemon:1
+bin:2
+sys:3
+sync:4
+games:5
+man:6
+lp:7
+mail:8
+news:9
+uucp:10
+proxy:13
+www-data:33
+backup:34
+list:38
+irc:39
+gnats:41
+_apt:100
+systemd-network:101
+systemd-resolve:102
+messagebus:103
+systemd-timesync:104
+syslog:105
+postfix:106
+telnetd:107
+Morpheus:4001
+Neo:4001
+Cypher:4002
+Apoc:4003
+Dozer:4003
+Smith:4004
+Trinity:4005
+nobody:65534
+Neo@f76cb5b89009:~$ sudo lynis show details AUTH-9208
+2026-09-21 08:09:30 Performing test ID AUTH-9208 (Check non-unique accounts in passwd file)
+2026-09-21 08:09:30 Test: Checking for non-unique accounts
+2026-09-21 08:09:30 Result: found multiple accounts with same UID
+2026-09-21 08:09:30 Output (non-unique UIDs): 4001
+4003
+2026-09-21 08:09:30 Warning: Multiple accounts found with same UID [test:AUTH-9208] [details:-] [solution:-]
+2026-09-21 08:09:30 Remarks: Non unique UIDs can be a risk for the system or part of a configuration mistake
+2026-09-21 08:09:30 Prerequisite test: /usr/sbin/chkgrp
+2026-09-21 08:09:30 ====
+Neo@f76cb5b89009:~$ ls -ld /etc/sudoers.d
+drwxr-xr-x 1 root root 4096 Dec 16  2024 /etc/sudoers.d
+Neo@f76cb5b89009:~$ ls -l /etc/sudoers.d
+total 16
+-r--r----- 1 root root   30 Dec 16  2024 Cypher
+-r--r----- 1 root root   27 Dec 16  2024 Neo
+-r--r----- 1 root root 1096 Aug  3  2022 README
+-rw-r--r-- 1 root root   22 Dec 16  2024 Trinity
+Neo@f76cb5b89009:~$ sudo cat /etc/sudoers.d/Cypher
+Cypher ALL=(ALL) NOPASSWD:ALL
+Neo@f76cb5b89009:~$ sudo cat /etc/sudoers.d/Trinity
+Trinity ALL=(ALL) ALL
+Neo@f76cb5b89009:~$ ls -ld /home/*
+drwxr-x--- 2 Dozer   FreeAgents 4096 Dec 16  2024 /home/Apoc
+drwxr-x--- 1 Cypher  Misfit     4096 Dec 16  2024 /home/Cypher
+drwxr-x--- 1 Dozer   FreeAgents 4096 Dec 16  2024 /home/Dozer
+drwxr-x--- 1 Neo     Hacker     4096 Dec 16  2024 /home/Morpheus
+drwxr-x--- 1 Neo     Hacker     4096 Sep 21 08:29 /home/Neo
+drwxrwxrwx 1 Smith   Smith      4096 Dec 16  2024 /home/Smith
+drwxr-x--- 2 Trinity Trinity    4096 Dec 16  2024 /home/Trinity
+Neo@f76cb5b89009:~$ ls /etc/xinetd.d/
+chargen  chargen-udp  daytime  daytime-udp  discard  discard-udp  echo  echo-udp  servers  services  telnet  time  time-udp
+Neo@f76cb5b89009:~$ sudo cat /etc/xinetd.d/telnet
+service telnet
+{
+    disable = no
+    flags = REUSE
+    socket_type = stream
+    wait = no
+    user = root
+    server = /usr/sbin/in.telnetd
+    log_on_failure += USERID
+}
+Neo@f76cb5b89009:~$ sudo lynis show details PKGS-7392
+2026-09-21 08:09:55 Performing test ID PKGS-7392 (Check for Debian/Ubuntu security updates)
+2026-09-21 08:09:55 Action: updating package repository with apt-get
+2026-09-21 08:10:00 Result: apt-get finished
+2026-09-21 08:10:00 Test: Checking if /usr/lib/update-notifier/apt-check exists
+2026-09-21 08:10:01 Result: apt-check (update-notifier-common) not found
+2026-09-21 08:10:10 Result: found vulnerable package(s) via apt-get (-security channel)
+2026-09-21 08:10:10 Found vulnerable package: apache2
+2026-09-21 08:10:10 Found vulnerable package: apache2-bin
+2026-09-21 08:10:10 Found vulnerable package: apache2-data
+2026-09-21 08:10:10 Found vulnerable package: apache2-utils
+2026-09-21 08:10:10 Found vulnerable package: bsdutils
+2026-09-21 08:10:10 Found vulnerable package: bzip2
+2026-09-21 08:10:10 Found vulnerable package: ca-certificates
+2026-09-21 08:10:10 Found vulnerable package: coreutils
+2026-09-21 08:10:10 Found vulnerable package: cpio
+2026-09-21 08:10:10 Found vulnerable package: diffutils
+2026-09-21 08:10:10 Found vulnerable package: dirmngr
+2026-09-21 08:10:10 Found vulnerable package: distro-info-data
+2026-09-21 08:10:10 Found vulnerable package: dpkg
+2026-09-21 08:10:10 Found vulnerable package: gcc-12-base
+2026-09-21 08:10:10 Found vulnerable package: gir1.2-packagekitglib-1.0
+2026-09-21 08:10:10 Found vulnerable package: git
+2026-09-21 08:10:10 Found vulnerable package: git-man
+2026-09-21 08:10:10 Found vulnerable package: gnupg
+2026-09-21 08:10:10 Found vulnerable package: gnupg-l10n
+2026-09-21 08:10:10 Found vulnerable package: gnupg-utils
+2026-09-21 08:10:10 Found vulnerable package: gpg
+2026-09-21 08:10:10 Found vulnerable package: gpg-agent
+2026-09-21 08:10:10 Found vulnerable package: gpg-wks-client
+2026-09-21 08:10:10 Found vulnerable package: gpg-wks-server
+2026-09-21 08:10:10 Found vulnerable package: gpgconf
+2026-09-21 08:10:10 Found vulnerable package: gpgsm
+2026-09-21 08:10:10 Found vulnerable package: gpgv
+2026-09-21 08:10:10 Found vulnerable package: gzip
+2026-09-21 08:10:10 Found vulnerable package: libaprutil1
+2026-09-21 08:10:10 Found vulnerable package: libaprutil1-dbd-sqlite3
+2026-09-21 08:10:10 Found vulnerable package: libaprutil1-ldap
+2026-09-21 08:10:10 Found vulnerable package: libattr1
+2026-09-21 08:10:10 Found vulnerable package: libblkid1
+2026-09-21 08:10:10 Found vulnerable package: libbz2-1.0
+2026-09-21 08:10:10 Found vulnerable package: libc-bin
+2026-09-21 08:10:10 Found vulnerable package: libc6
+2026-09-21 08:10:10 Found vulnerable package: libcap2
+2026-09-21 08:10:10 Found vulnerable package: libcap2-bin
+2026-09-21 08:10:10 Found vulnerable package: libcurl3-gnutls
+2026-09-21 08:10:10 Found vulnerable package: libcurl4
+2026-09-21 08:10:10 Found vulnerable package: libdw1
+2026-09-21 08:10:10 Found vulnerable package: libelf1
+2026-09-21 08:10:10 Found vulnerable package: libexpat1
+2026-09-21 08:10:10 Found vulnerable package: libgcc-s1
+2026-09-21 08:10:10 Found vulnerable package: libgcrypt20
+2026-09-21 08:10:10 Found vulnerable package: libglib2.0-0
+2026-09-21 08:10:10 Found vulnerable package: libglib2.0-bin
+2026-09-21 08:10:10 Found vulnerable package: libglib2.0-data
+2026-09-21 08:10:10 Found vulnerable package: libgnutls30
+2026-09-21 08:10:10 Found vulnerable package: libgstreamer1.0-0
+2026-09-21 08:10:10 Found vulnerable package: libkmod2
+2026-09-21 08:10:10 Found vulnerable package: liblzma5
+2026-09-21 08:10:10 Found vulnerable package: libmount1
+2026-09-21 08:10:10 Found vulnerable package: libncurses6
+2026-09-21 08:10:10 Found vulnerable package: libncursesw6
+2026-09-21 08:10:10 Found vulnerable package: libnghttp2-14
+2026-09-21 08:10:10 Found vulnerable package: libnss-systemd
+2026-09-21 08:10:10 Found vulnerable package: libp11-kit0
+2026-09-21 08:10:10 Found vulnerable package: libpackagekit-glib2-18
+2026-09-21 08:10:10 Found vulnerable package: libpam-cap
+2026-09-21 08:10:10 Found vulnerable package: libpam-modules
+2026-09-21 08:10:10 Found vulnerable package: libpam-modules-bin
+2026-09-21 08:10:10 Found vulnerable package: libpam-runtime
+2026-09-21 08:10:10 Found vulnerable package: libpam-systemd
+2026-09-21 08:10:10 Found vulnerable package: libpam0g
+2026-09-21 08:10:10 Found vulnerable package: libperl5.34
+2026-09-21 08:10:10 Found vulnerable package: libpolkit-agent-1-0
+2026-09-21 08:10:10 Found vulnerable package: libpolkit-gobject-1-0
+2026-09-21 08:10:10 Found vulnerable package: libpython3.10
+2026-09-21 08:10:10 Found vulnerable package: libpython3.10-minimal
+2026-09-21 08:10:10 Found vulnerable package: libpython3.10-stdlib
+2026-09-21 08:10:10 Found vulnerable package: libsmartcols1
+2026-09-21 08:10:10 Found vulnerable package: libsodium23
+2026-09-21 08:10:10 Found vulnerable package: libsqlite3-0
+2026-09-21 08:10:10 Found vulnerable package: libssh-4
+2026-09-21 08:10:10 Found vulnerable package: libssl3
+2026-09-21 08:10:10 Found vulnerable package: libstdc++6
+2026-09-21 08:10:10 Found vulnerable package: libsystemd0
+2026-09-21 08:10:10 Found vulnerable package: libtasn1-6
+2026-09-21 08:10:10 Found vulnerable package: libtinfo6
+2026-09-21 08:10:10 Found vulnerable package: libudev1
+2026-09-21 08:10:10 Found vulnerable package: libuuid1
+2026-09-21 08:10:10 Found vulnerable package: libxml2
+2026-09-21 08:10:10 Found vulnerable package: mailcap
+2026-09-21 08:10:10 Found vulnerable package: mount
+2026-09-21 08:10:10 Found vulnerable package: ncurses-base
+2026-09-21 08:10:10 Found vulnerable package: ncurses-bin
+2026-09-21 08:10:10 Found vulnerable package: openssh-client
+2026-09-21 08:10:10 Found vulnerable package: openssl
+2026-09-21 08:10:10 Found vulnerable package: packagekit
+2026-09-21 08:10:10 Found vulnerable package: packagekit-tools
+2026-09-21 08:10:10 Found vulnerable package: perl
+2026-09-21 08:10:10 Found vulnerable package: perl-base
+2026-09-21 08:10:10 Found vulnerable package: perl-modules-5.34
+2026-09-21 08:10:10 Found vulnerable package: pkexec
+2026-09-21 08:10:10 Found vulnerable package: policykit-1
+2026-09-21 08:10:10 Found vulnerable package: polkitd
+2026-09-21 08:10:10 Found vulnerable package: postfix
+2026-09-21 08:10:10 Found vulnerable package: python-apt-common
+2026-09-21 08:10:10 Found vulnerable package: python3-apt
+2026-09-21 08:10:10 Found vulnerable package: python3-cryptography
+2026-09-21 08:10:10 Found vulnerable package: python3-httplib2
+2026-09-21 08:10:10 Found vulnerable package: python3-jwt
+2026-09-21 08:10:10 Found vulnerable package: python3-pkg-resources
+2026-09-21 08:10:10 Found vulnerable package: python3.10
+2026-09-21 08:10:10 Found vulnerable package: python3.10-minimal
+2026-09-21 08:10:11 Found vulnerable package: rsyslog
+2026-09-21 08:10:11 Found vulnerable package: sed
+2026-09-21 08:10:11 Found vulnerable package: sudo
+2026-09-21 08:10:11 Found vulnerable package: systemd
+2026-09-21 08:10:11 Found vulnerable package: systemd-sysv
+2026-09-21 08:10:11 Found vulnerable package: systemd-timesyncd
+2026-09-21 08:10:11 Found vulnerable package: tar
+2026-09-21 08:10:11 Found vulnerable package: tzdata
+2026-09-21 08:10:11 Found vulnerable package: util-linux
+2026-09-21 08:10:11 Found vulnerable package: vim
+2026-09-21 08:10:11 Found vulnerable package: vim-common
+2026-09-21 08:10:11 Found vulnerable package: vim-runtime
+2026-09-21 08:10:11 Found vulnerable package: wget
+2026-09-21 08:10:11 Found vulnerable package: xxd
+2026-09-21 08:10:11 Found vulnerable package: xz-utils
+2026-09-21 08:10:11 Warning: Found one or more vulnerable packages. [test:PKGS-7392] [details:-] [solution:-]
+2026-09-21 08:10:11 Suggestion: Update your system with apt-get update, apt-get upgrade, apt-get dist-upgrade and/or unattended-upgrades [test:PKGS-7392] [details:-] [solution:-]
+2026-09-21 08:10:11 ====
